@@ -198,6 +198,25 @@
 	
 }
 
+- (void)parseData:(NSData *)data textEncodingName:(NSString *)textEncodingName {
+	
+	// Reset
+	[self reset];
+	
+	// Perform checks before parsing
+	if (parsing) { [self parsingFailedWithErrorCode:MWErrorCodeGeneral 
+									 andDescription:@"Cannot start parsing as parsing is already in progress"]; return; }
+	
+	// Reset state for next parse
+	parsing = YES;
+	aborted = NO;
+	stopped = NO;
+	failed = NO;
+	parsingComplete = NO;
+	
+	[self startParsingData:data textEncodingName:textEncodingName]; // Process
+}
+
 // Begin XML parsing
 - (void)startParsingData:(NSData *)data textEncodingName:(NSString *)textEncodingName {
 	if (data && !feedParser) {
