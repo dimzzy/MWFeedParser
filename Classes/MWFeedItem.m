@@ -85,4 +85,16 @@
 	if (enclosures) [encoder encodeObject:enclosures forKey:@"enclosures"];
 }
 
+- (NSArray *)imageLinks {
+	NSMutableArray *links = [NSMutableArray array];
+	for (NSDictionary *enclosure in self.enclosures) {
+		NSString *elink = [enclosure objectForKey:@"url"];
+		NSString *etype = [enclosure objectForKey:@"type"];
+		if (elink && etype && [etype hasPrefix:@"image/"]) {
+			[links addObject:elink];
+		}
+	}
+	return links;
+}
+
 @end

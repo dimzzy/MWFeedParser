@@ -57,4 +57,6 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSArray *enclosures;
 
+- (NSArray *)imageLinks;
+
 @end
